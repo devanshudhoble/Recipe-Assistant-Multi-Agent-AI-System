@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe Assistant - Multi-Agent System</title>
+</head>
+<body>
+    <h1>🍳 Recipe Assistant - Multi-Agent AI System</h1>
+    <input id="ingredients" placeholder="Enter ingredients" />
+    <button onclick="run()">Run</button>
+    <pre id="out"></pre>
+
+    <script>
+        async function run(){
+            const ing = document.getElementById('ingredients').value;
+            const res = await fetch('/process',{
+                method:'POST',
+                headers:{'Content-Type':'application/json'},
+                body: JSON.stringify({ingredients: ing})
+            });
+            const data = await res.json();
+            document.getElementById('out').textContent = data.result;
+        }
+    </script>
+</body>
+</html>
